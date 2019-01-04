@@ -2,7 +2,7 @@ from Authorizer import Authorizer
 
 
 def temp():
-    url = 'https://oauth.reddit.com/r/popular/top.json?limit=1'
+    url = 'https://oauth.reddit.com/r/popular/top.json?limit=10'
 
 
     authorizer = Authorizer(url)
@@ -39,8 +39,10 @@ def temp():
 
     plt.bar(y_pos, performance, align='center', alpha=0.5)
     plt.xticks(y_pos, objects)
-    plt.xticks(rotation=25)
-    plt.ylabel('Usage')
+    plt.xticks(rotation=35)
+    plt.ylabel('Count')
     plt.title('Top Subreddits of the Day')
 
-    plt.savefig('C:/Users/rober/TopReddit/app/static/graph.png')
+    plt.savefig('app/static/graph.png')
+
+temp()

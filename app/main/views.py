@@ -1,9 +1,9 @@
 from flask import render_template
 from . import main
-import parser
+from Parser import temp
 
 
 @main.route('/')
 def index():
-    parser.temp()
+    temp()
     return render_template('index.html')
