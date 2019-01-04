@@ -1,29 +1,47 @@
 from Authorizer import Authorizer
 import pandas as pd
-url = 'https://oauth.reddit.com/r/popular/hot.json?limit=1000'
+url = 'https://oauth.reddit.com/r/popular/top.json?limit=101'
 
 authorizer = Authorizer(url)
 text = authorizer.getJSON()
 children = text['data']['children']
 subCount = {}
+counter = 0
 for child in children:
-    #print(child['data']['subreddit'])
     subReddit = child['data']['subreddit']
     if subReddit in subCount:
         subCount[subReddit] += 1
     else:
         subCount[subReddit] = 1
+    counter += 1
+print(counter)
 print(subCount)
+
+sorted_dictionary = sorted((value, key) for (key, value) in subCount.items())[::-1]
+
+
 
 subReddits = []
 counts = []
+for dict in sorted_dictionary:
+    subReddits.append(dict[1])
+    counts.append(dict[0])
 
-for sub in subCount:
-    subReddits.append(sub)
-    counts.append(subCount[sub])
 
-print(subReddits)
-print(counts)
+import matplotlib.pyplot as plt;
 
-df = pd.DataFrame({'sub':subReddits, 'val':counts})
-ax = df.plot.bar(x='lab', y='val', rot=0)
+plt.rcdefaults()
+import numpy as np
+
+objects = subReddits[:10]
+y_pos = np.arange(len(objects))
+performance = counts[:10]
+
+plt.bar(y_pos, performance, align='center', alpha=0.5)
+plt.xticks(y_pos, objects)
+plt.xticks(rotation=15)
+plt.ylabel('Usage')
+plt.title('Top Subreddits of the Day')
+
+plt.show()
+
