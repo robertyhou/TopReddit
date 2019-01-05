@@ -1,3 +1,8 @@
+<!--
+The index page is, as of now, the only page and displays the bar graph and and a short
+form to allow customization of queries.
+-->
+
 {% extends "base.html" %}
 
 {% import "bootstrap/wtf.html" as wtf %}
@@ -20,9 +25,12 @@
 {% endblock %}
 
 {% block page_content %}
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Expires" content="0"/>
+<h1 class="display-3">Top Reddit</h1>
+<p>Top Reddit is a little web-applet that queries data from Reddit and creates bar-graphs
+displaying information about the top sub-reddits from /r/all or /r/popular. The form below allows
+for query customization. Default parameters are the first 100 posts within the last 24hrs from /r/all.
+Created by Samuel Fu and Robert Hou</p>
+
 <img src="{{url_for('static', filename='graph.png')}}" class="center" />
 {{ wtf.quick_form(form) }}
 {% endblock %}
