@@ -1,7 +1,21 @@
 import requests.auth
-import time
+"""
+Authenticates user on Reddit API using OAuth2
+Obtains JSON of requested query
+"""
+
 
 class Authorizer():
+
+    """
+    Requests Reddit query in JSON format
+
+    Keyword arguments:
+    limit     -- number of posts (default 100)
+    subreddit -- type of subreddit (default '/r/popular')
+    mode      -- type of sorting (default 'top')
+    t         -- time range (default 'day')
+    """
     def __init__(self, limit=100, subreddit='popular', mode='top', t='day'):
         self.subreddit = subreddit
         self.mode = mode
@@ -13,7 +27,8 @@ class Authorizer():
         else:
             self.multiple_requests(limit)
 
-    def simple_request(self, limit = 100):
+    """Obtains JSON data for under 100 posts"""
+    def simple_request(self, limit=100):
         self.url += str(limit)
         client_auth = requests.auth.HTTPBasicAuth('15umy6vmCIHQ7A', 'uQgAoXAeOV6r6S3AKc9V8i7fFQU')
         post_data = {"grant_type": "password", "username": "ssf2130", "password": "github"}
@@ -28,6 +43,7 @@ class Authorizer():
         self.JSON_page_list.append(request_JSON)
         self.after = request_JSON['data']['after']
 
+    """Obtains JSON data for over 100 posts"""
     def multiple_requests(self, limit=200):
         self.simple_request(100)
         limit -= 100
@@ -42,11 +58,15 @@ class Authorizer():
             self.url = 'https://oauth.reddit.com/r/'+self.subreddit+'/' + self.mode + '.json?t='+self.t+'&limit=' + str(limit) + "&after=" + self.after
             request_JSON = requests.get(self.url, headers=self.headers).json()
             self.JSON_page_list.append(request_JSON)
+
+    """Returns type of subreddit"""
     def get_subreddit(self):
         return self.subreddit
 
+    """Returns list of JSON data"""
     def getJSON(self):
         return self.JSON_page_list
 
+    """Returns mode of time"""
     def get_time(self):
         return self.t
