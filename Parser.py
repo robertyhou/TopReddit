@@ -57,7 +57,7 @@ class Parser:
 
             plt.ylabel('Count')
             plt.title('Top Subreddits of the Day')
-            plt.savefig('app/static/'+key+'.png')
+            plt.savefig('app/static/graph.png')
             plt.clf()
             plt.cla()
             plt.close()
