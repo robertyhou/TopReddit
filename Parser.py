@@ -53,7 +53,7 @@ class Parser:
 
         plt.xticks(y_pos, subreddits, fontsize=8)
         ax = plt.gca()
-        ax.set_aspect(aspect=0.2)
+
         pad = 5
         for tick in ax.xaxis.get_major_ticks()[0:]:
             tick.set_pad(pad)
