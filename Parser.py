@@ -2,7 +2,22 @@ from Authorizer import Authorizer
 import matplotlib.pyplot as plt
 import numpy as np
 
+"""
+Parses data from JSON returned from Authorizer
+Creates frequency list for each subreddit
+Plots the top 10 subreddit according to user input
+"""
+
+
 class Parser:
+    """
+    Creates dictionary of frequency for each subreddit based off JSON data
+
+    Keyword arguments:
+    limit     -- number of posts (default 100)
+    subreddit -- type of subreddit (default '/r/popular')
+    t         -- time range (default 'day')
+    """
     def __init__(self, limit=100, subreddit='all', t='day'):
         authorizer = Authorizer(limit, subreddit=subreddit, t=t)
         self.subreddit = subreddit
@@ -26,6 +41,7 @@ class Parser:
             self.top_subreddits.append(key[1])
             self.counts.append(key[0])
 
+    """Plots the frequency of top 10 subreddits using Matplotlib"""
     def plot(self):
         subreddits = self.top_subreddits[:10]
         y_pos = np.arange(len(subreddits))
