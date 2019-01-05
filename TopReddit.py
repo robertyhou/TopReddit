@@ -1,7 +1,7 @@
 import os
 from app import create_app
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'production')
+app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 app.config['SECRET_KEY'] = 'I <3 sfu2000'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 

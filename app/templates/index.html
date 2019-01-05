@@ -9,12 +9,20 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
+<style>
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
 {% endblock %}
 
 {% block page_content %}
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
-<img src="{{url_for('static', filename='graph.png')}}" />
+<img src="{{url_for('static', filename='graph.png')}}" class="center" />
 {{ wtf.quick_form(form) }}
 {% endblock %}

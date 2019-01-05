@@ -1,4 +1,5 @@
 import requests.auth
+import time
 """
 Authenticates user on Reddit API using OAuth2
 Obtains JSON of requested query
