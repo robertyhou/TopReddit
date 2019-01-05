@@ -1,9 +1,9 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Reddit{% endblock %}
+{% block title %}Top Reddit{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Hello, my dude!</h1>
-</div>
+<img src="{{url_for('static', filename='graph.png')}}" />
+{{ wtf.quick_form(form) }}
 {% endblock %}
