@@ -1,7 +1,7 @@
 import os
 from app import create_app
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+app = create_app(os.getenv('FLASK_CONFIG') or 'production')
 app.config['SECRET_KEY'] = 'I <3 sfu2000'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
@@ -17,6 +17,9 @@ def add_header(response):
 @app.shell_context_processor
 def make_shell_context():
     return dict()
+
+if __name__ == '__main__':
+    app.run()
 
 
 """@app.cli.command()
