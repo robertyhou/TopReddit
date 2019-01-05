@@ -31,7 +31,7 @@ class Parser:
         performance = self.counts[:10]
 
         plt.bar(y_pos, performance, align='center', alpha=0.5)
-        plt.tight_layout()
+
         plt.xticks(y_pos, objects, fontsize=8)
         ax = plt.gca()
         ax.set_aspect(aspect=0.2)
@@ -45,9 +45,10 @@ class Parser:
 
         plt.ylabel('Count')
         plt.title('Top Subreddits of the Day')
+        plt.tight_layout()
         plt.savefig('app/static/graph.png')
         plt.gcf().clear()
 
 if __name__ == '__main__':
-    parser = Parser(5)
+    parser = Parser()
     parser.plot()
