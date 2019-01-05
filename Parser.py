@@ -3,20 +3,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class Parser:
-    def __init__(self,limit=100):
+    def __init__(self, limit=100, subreddit='all', t='day'):
         authorizer = []
-        authorizer.append(Authorizer(limit, subreddit='all', t='hour'))
-        authorizer.append(Authorizer(limit, subreddit='popular', t='hour'))
-        authorizer.append(Authorizer(limit, subreddit='all', t='day'))
-        authorizer.append(Authorizer(limit, subreddit='popular', t='day'))
-        authorizer.append(Authorizer(limit, subreddit='all', t='week'))
-        authorizer.append(Authorizer(limit, subreddit='popular', t='week'))
-        authorizer.append(Authorizer(limit, subreddit='all', t='month'))
-        authorizer.append(Authorizer(limit, subreddit='popular', t='month'))
-        authorizer.append(Authorizer(limit, subreddit='all', t='year'))
-        authorizer.append(Authorizer(limit, subreddit='popular', t='year'))
-        authorizer.append(Authorizer(limit, subreddit='all', t='all'))
-        authorizer.append(Authorizer(limit, subreddit='popular', t='all'))
+        authorizer.append(Authorizer(limit, subreddit=subreddit, t=t))
+
 
         self.mode_dict = {}
         self.count_dict = {}
@@ -44,6 +34,7 @@ class Parser:
 
             self.mode_dict[type] = subReddits
             self.count_dict[type] = counts
+
     def plot(self):
         for key, value in self.mode_dict.items():
             objects = self.mode_dict[key][:10]
