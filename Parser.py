@@ -2,37 +2,56 @@ from Authorizer import Authorizer
 import matplotlib.pyplot as plt
 import numpy as np
 
+"""
+Parses data from JSON returned from Authorizer
+Creates frequency list for each subreddit
+Plots the top 10 subreddit according to user input
+"""
+
+
 class Parser:
+    """
+    Creates dictionary of frequency for each subreddit based off JSON data
+
+    Keyword arguments:
+    limit     -- number of posts (default 100)
+    subreddit -- type of subreddit (default '/r/popular')
+    t         -- time range (default 'day')
+    """
     def __init__(self, limit=100, subreddit='all', t='day'):
         authorizer = Authorizer(limit, subreddit=subreddit, t=t)
+        self.subreddit = subreddit
+        self.time = t
         request_JSON = authorizer.getJSON()
-        subCount = {}
+        sub_count = {}
         for text in request_JSON:
             children = text['data']['children']
             for child in children:
-                subReddit = child['data']['subreddit']
-                if subReddit in subCount:
-                    subCount[subReddit] += 1
+                child_subreddit = child['data']['subreddit']
+                if child_subreddit in sub_count:
+                    sub_count[child_subreddit] += 1
                 else:
-                    subCount[subReddit] = 1
+                    sub_count[child_subreddit] = 1
 
-        sorted_dictionary = sorted((value, key) for (key, value) in subCount.items())[::-1]
+        sorted_dictionary = sorted((value, key) for (key, value) in sub_count.items())[::-1]
 
-        self.subReddits = []
+        self.top_subreddits = []
         self.counts = []
-        for dict in sorted_dictionary:
-            self.subReddits.append(dict[1])
-            self.counts.append(dict[0])
+        for key in sorted_dictionary:
+            self.top_subreddits.append(key[1])
+            self.counts.append(key[0])
 
-
+    """Plots the frequency of top 10 subreddits using Matplotlib"""
     def plot(self):
-        objects = self.subReddits[:10]
-        y_pos = np.arange(len(objects))
-        performance = self.counts[:10]
+        subreddits = self.top_subreddits[:10]
+        y_pos = np.arange(len(subreddits))
+        number_of_occurrence = self.counts[:10]
+        for n in range(len(subreddits)):
+            if len(subreddits[n]) > 10:
+                subreddits[n] = subreddits[n][:10] + '...'
+        plt.bar(y_pos, number_of_occurrence, align='center', alpha=0.5)
 
-        plt.bar(y_pos, performance, align='center', alpha=0.5)
-
-        plt.xticks(y_pos, objects, fontsize=8)
+        plt.xticks(y_pos, subreddits, fontsize=8)
         ax = plt.gca()
         ax.set_aspect(aspect=0.2)
         pad = 5
@@ -44,7 +63,7 @@ class Parser:
                 pad = 5
 
         plt.ylabel('Count')
-        plt.title('Top Subreddits of the Day')
+        plt.title('Top 10 Subreddits of '+self.time+' in /r/'+self.subreddit)
         plt.tight_layout()
         plt.savefig('app/static/graph.png')
         plt.gcf().clear()
