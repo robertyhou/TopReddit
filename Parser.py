@@ -29,7 +29,9 @@ class Parser:
         objects = self.subReddits[:10]
         y_pos = np.arange(len(objects))
         performance = self.counts[:10]
-
+        for n in range(len(objects)):
+            if len(objects[n]) > 10:
+                objects[n] = objects[n][:10] + '...'
         plt.bar(y_pos, performance, align='center', alpha=0.5)
 
         plt.xticks(y_pos, objects, fontsize=8)
