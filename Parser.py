@@ -46,18 +46,26 @@ class Parser:
             self.count_dict[type] = counts
     def plot(self):
         for key, value in self.mode_dict.items():
-            objects = self.mode_dict[key][:20]
+            objects = self.mode_dict[key][:10]
             y_pos = np.arange(len(objects))
-            performance = self.count_dict[key][:20]
+            performance = self.count_dict[key][:10]
+
 
             plt.bar(y_pos, performance, align='center', alpha=0.5)
             plt.tight_layout()
-            plt.xticks(y_pos, objects)
+            plt.xticks(y_pos, objects, fontsize=8)
+            ax = plt.gca()
+            ax.set_aspect(aspect=0.2)
+            pad = 5
+            for tick in ax.xaxis.get_major_ticks()[0:]:
+                tick.set_pad(pad)
+                if pad < 20:
+                    pad += 10
+                elif pad > 20:
+                    pad = 5
 
-            plt.xticks(rotation=25)
             plt.ylabel('Count')
             plt.title('Top Subreddits of the Day')
-
             plt.savefig('app/static/'+key+'.png')
             plt.clf()
             plt.cla()
