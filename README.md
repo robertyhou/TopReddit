@@ -1,6 +1,6 @@
 # TopReddit
 
-![alt text](https://raw.githubusercontent.com/robertyhou/TopReddit/blob/master/app/static/graph.png)
+![alt text](https://github.com/robertyhou/TopReddit/blob/master/app/static/graph.png)
 
 ## Features
 - Protects against CSRF attacks
