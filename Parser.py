@@ -53,7 +53,7 @@ class Parser:
             plt.bar(y_pos, performance, align='center', alpha=0.5)
             plt.tight_layout()
             plt.xticks(y_pos, objects)
-            
+
             plt.xticks(rotation=25)
             plt.ylabel('Count')
             plt.title('Top Subreddits of the Day')
