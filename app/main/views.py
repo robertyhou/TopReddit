@@ -7,7 +7,10 @@ from .forms import QueryForm
 def index():
     form = QueryForm()
     if form.validate_on_submit():
-        return redirect(url_for('main.index'))
+        parser = Parser(int(form.numPosts.data), form.forum.data, form.time.data)
+        parser.plot()
+        return render_template('index.html', form=form)
+        #return redirect(url_for('main.index'))
     parser = Parser()
     parser.plot()
     return render_template('index.html', form=form)
