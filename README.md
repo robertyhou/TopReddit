@@ -3,6 +3,12 @@
 ![alt text](https://github.com/robertyhou/TopReddit/blob/master/app/static/graph.png)
 
 ## Features
+- Flask Web Server
+- Query custom number of reddit posts using Reddit API
+- Utilizes OAuth2 to authenticate user
+- Select from /r/all or /r/popular
+- Choose time range (Day, Week, Month, Year, All Time)
+- Updates dynamically over time
 - Protects against CSRF attacks
 
 ## Contributors:
