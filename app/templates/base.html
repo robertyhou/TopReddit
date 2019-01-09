@@ -1,16 +1,12 @@
 <!--
-Base template for all other templates on site. Prevents caching in head
-so when the user enters a new query and submits, new image is displayed
-and not a cached one. Sets up infrastructure for message flashing
+Base template for all other templates on site.
+Sets up infrastructure for message flashing
 in body.
 -->
 
 <!doctype html>
 <html>
 <head>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-    <meta http-equiv="Pragma" content="no-cache"/>
-    <meta http-equiv="Expires" content="0"/>
     {% extends "bootstrap/base.html" %}
     {% block head %}
         {{ super() }}

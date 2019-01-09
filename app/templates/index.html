@@ -11,9 +11,6 @@ form to allow customization of queries.
 
 {% block head %}
 {{ super() }}
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Expires" content="0"/>
 <style>
     .center {
   display: block;
@@ -29,7 +26,8 @@ form to allow customization of queries.
 <p>Top Reddit is a little web-applet that queries data from Reddit and creates bar-graphs
 displaying information about the top sub-reddits from /r/all or /r/popular. The form below allows
 for query customization. Default parameters are the first 100 posts within the last 24hrs from /r/all.
-Created by Samuel Fu and Robert Hou</p>
+Larger requests require more time.
+Created by Samuel Fu and Robert Hou.</p>
 
 <img src="{{url_for('static', filename='graph.png')}}" class="center" />
 {{ wtf.quick_form(form) }}

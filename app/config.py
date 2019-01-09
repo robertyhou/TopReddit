@@ -1,3 +1,7 @@
+"""
+Classes containing configuration parameters for the flask application.
+"""
+
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
